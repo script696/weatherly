@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import Flex from "./shared/Flex/Flex";
-import Phone from "./shared/phone/Phone";
+import Phone from "./shared/Phone/Phone";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const AppWrapper = styled.div`
 function App() {
   return (
     <AppWrapper>
-      <Flex>
+      <Flex height="100%">
         <Phone>
           <DashBoard />
         </Phone>

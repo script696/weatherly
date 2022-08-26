@@ -1,19 +1,18 @@
 import styled from "styled-components/macro";
 
-
 const StyledFlex = styled.div<any>`
-height: 100%;
-width: 100%;
-display: flex;
-flex-direction: ${props => props.direction || 'row'};
-align-items: ${props => props.align || 'center'};
-justify-content: ${props => props.justify|| 'center'};
-`
+  width: ${({ width }) => width || "auto"};
+  height: ${({ height }) => height || "auto"};
+  margin: ${({ margin }) => margin || "0"};
+  display: flex;
+  flex-direction: ${({ direction }) => direction || "row"};
+  align-items: ${({ align }) => align || "center"};
+  justify-content: ${({ justify }) => justify || "center"};
+  gap: ${({ gap }) => gap || "0"};
+`;
 
 const Flex = (props: any) => {
-  return (
-    <StyledFlex {...props}/>
-  )
-}
+  return <StyledFlex {...props} />;
+};
 
-export default Flex
+export default Flex;
