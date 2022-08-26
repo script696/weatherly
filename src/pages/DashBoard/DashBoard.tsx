@@ -17,6 +17,11 @@ import UpdateInfoContainer from "./components/UpdateInfoContainer/UpdateInfoCont
 import MainWeatherLogoContainer from "./components/MainWeatherLogoContainer/MainWeatherLogoContainer";
 import MainWeatherInfoContainer from "./components/MainWeatherInfoContainer/MainWeatherInfoContainer";
 import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
+import BottomSlider from "./components/BottomSlider/BottomSlider";
+import Swiper1 from "./components/Swiper";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const StyledDashBoard = styled.div`
   position: relative;
@@ -69,26 +74,48 @@ const DashBoard = () => {
         </MainWeatherLogoContainer>
         <MainWeatherInfoContainer>
           <Flex direction="column" margin="auto" width="50%">
-            <Paragraph text='22' weight="700" size="116px" height="143px"/>
-            <Paragraph text='Thunderstorm' weight="800" size="22px" height="27px" margin="0 0 3px 0"/>
-            <Paragraph text='Today, 10 August' weight="500" size="12px" height="15px" color="#69B5FF"/>
+            <Paragraph text="22" weight="700" size="116px" height="143px" />
+            <Paragraph
+              text="Thunderstorm"
+              weight="800"
+              size="22px"
+              height="27px"
+              margin="0 0 3px 0"
+            />
+            <Paragraph
+              text="Today, 10 August"
+              weight="500"
+              size="12px"
+              height="15px"
+              color="#69B5FF"
+            />
           </Flex>
         </MainWeatherInfoContainer>
         <MainWeatherInfoContainer>
           <Flex gap="53px">
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind"/>
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind"/>
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind"/>
+            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
+            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
+            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
           </Flex>
         </MainWeatherInfoContainer>
       </Screen>
       <Bottom>
         <BottomHeader>
-          <Flex justify="space-between">
+          <Flex justify="space-between" width="100%">
             <Title size="18px" height="22px" text="Today" weight="800" />
-            <Button text="7 days" color="#687B92" fz="12px" lh="15px" />
+            <Button>
+              <Paragraph
+                text="7 days"
+                color="#687B92"
+                size="12px"
+                height="15px"
+              />
+            </Button>
           </Flex>
         </BottomHeader>
+        <BottomSlider>
+         <Swiper1/>
+        </BottomSlider>
       </Bottom>
     </StyledDashBoard>
   );
