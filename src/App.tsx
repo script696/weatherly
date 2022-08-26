@@ -5,6 +5,8 @@ import Phone from "./shared/Phone/Phone";
 
 import getWeather from "./api";
 import { useEffect } from "react";
+import { useAppDispatch } from "./hooks/hooks";
+import { setWeatherData } from "./store/slices/counterSlice";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -19,14 +21,17 @@ const AppWrapper = styled.div`
 
 function App() {
 
+  const dispatch = useAppDispatch()
+
   useEffect (()=>{
     (async ()=>{
       const res = await getWeather()
       const {time, temperature_2m : temperature} = res.data.hourly
-      console.log(time);
-      console.log(temperature);
+      dispatch(setWeatherData({time, temperature}))
     })()
   },[])
+
+  
   return (
     <AppWrapper>
       <Flex height="100%">
