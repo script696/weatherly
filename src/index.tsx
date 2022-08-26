@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import styled, { createGlobalStyle } from "styled-components/macro";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 const Global = createGlobalStyle`
 
@@ -25,13 +27,14 @@ html,body {
 }
 `;
 
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Global />
-    <App />
+    <Provider store={store}>
+      <Global />
+      <App />
+    </Provider>
   </React.StrictMode>
 );

@@ -3,7 +3,7 @@ import "swiper/css";
 import styled from "styled-components/macro";
 import WeatherSliderCard from "./WeatherSliderCard/WeatherSliderCard";
 
-const StyledSwiper = styled.p<any>``;
+const StyledSwiper = styled.div<any>``;
 const Swiper1 = () => {
   return (
     <StyledSwiper>
@@ -11,7 +11,7 @@ const Swiper1 = () => {
         spaceBetween={10}
         slidesPerView={4}
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide>
           <WeatherSliderCard/>
