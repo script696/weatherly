@@ -9,7 +9,6 @@ const StyledTitle = styled.h2<any>`
 `;
 
 const Title = ({...props} : any) : any => {
-  console.log(props.color);
   
   return <StyledTitle {...props}>{props.text}</StyledTitle>;
 };

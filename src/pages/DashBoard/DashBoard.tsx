@@ -20,6 +20,10 @@ import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import BottomSlider from "./components/BottomSlider/BottomSlider";
 import Swiper1 from "./components/Swiper";
 
+import functionName from '../../api'
+
+
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
@@ -34,6 +38,8 @@ const StyledDashBoard = styled.div`
 `;
 
 const DashBoard = () => {
+
+  functionName()
   return (
     <StyledDashBoard>
       <Screen>

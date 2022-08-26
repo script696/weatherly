@@ -39,8 +39,8 @@ const GlobalSvgSelector = ({ id }: any) => {
             cy="17.5"
             r="16.8"
             stroke="white"
-            stroke-opacity="0.59"
-            stroke-width="1.4"
+            strokeOpacity="0.59"
+            strokeWidth="1.4"
           />
           <circle cx="13.1249" cy="13.125" r="2.43056" fill="#FCFFFF" />
           <circle cx="13.1249" cy="21.875" r="2.43056" fill="#FCFFFF" />
@@ -60,23 +60,23 @@ const GlobalSvgSelector = ({ id }: any) => {
           <path
             d="M2.50956 18.5021L2.50939 18.5111"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M2.6641 10.5036L2.66393 10.5126"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M2.81889 2.50506L2.81871 2.51406"
             stroke="white"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       );

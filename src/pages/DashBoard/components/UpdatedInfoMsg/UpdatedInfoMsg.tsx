@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-const StyledUpdatedInfoMsg = styled.p<any>`
+const StyledUpdatedInfoMsg = styled.div<any>`
   font-size: 11px;
   line-height: 100%;
   
