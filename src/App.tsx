@@ -25,14 +25,7 @@ function App() {
   const {currentWeather} = useAppSelector(state => state.weather)
   const dispatch = useAppDispatch()
 
-  // useEffect (()=>{
-  //   (async ()=>{
-  //     const res = await getWeather()
-  //     console.log(res);
-  //     const {time, temperature_2m : temperature} = res.data.hourly
-  //     dispatch(setWeatherData({time, temperature}))
-  //   })()
-  // },[])
+ 
 
   useEffect(()=>{
     dispatch(fetchWeather())
@@ -40,9 +33,9 @@ function App() {
 
 
 // useEffect(()=>{
-//   console.log(currentWeather);
+//   console.log(daylyForecast);
   
-// },[currentWeather])
+// },[daylyForecast])
   
   return (
     <AppWrapper>
