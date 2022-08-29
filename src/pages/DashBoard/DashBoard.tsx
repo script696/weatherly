@@ -3,7 +3,7 @@ import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
 import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Wrapper from "../../shared/Wrapper/Wrapper";
-import Bottom from "./components/Bottom/Bottom";
+import Bottom from "../../shared/Bottom/Bottom";
 import BottomHeader from "./components/BottomHeader/BottomHeader";
 import Screen from "../../shared/Screen/Screen";
 import Title from "../../shared/Title/Title";

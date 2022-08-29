@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
 import weatherIcons from "../../img/weatherIcons/weatherIcons";
+import Bottom from "../../shared/Bottom/Bottom";
 import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Paragraph from "../../shared/Paragraph/Paragraph";
@@ -12,6 +13,7 @@ import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 import Wrapper from "../../shared/Wrapper/Wrapper";
 import MainInfoContainer from "./components/MainOnfoContainer/MainOnfoContainer";
+import RowItem from "./components/RowItem/RowItem";
 import TeampMinMax from "./components/TeampMinMax/TeampMinMax";
 
 const StyledTommorrowFrcst = styled.section`
@@ -58,7 +60,7 @@ const TommorrowFrcst = ({ ...props }) => {
                 size="18px"
                 height="22px"
               />
-              <TeampMinMax max="20" min={`/17${'\u00B0'}`} />
+              <TeampMinMax max="20" min={`/17${"\u00B0"}`} />
               <Paragraph
                 text="Rainy Cloud"
                 weight="600"
@@ -71,16 +73,8 @@ const TommorrowFrcst = ({ ...props }) => {
         </MainInfoContainer>
         <WeatherRowContainer>
           <Flex gap="53px">
-            <WeatherInfoCard1
-              icon="windy"
-              value={`${0}kmh`}
-              type="Wind"
-            />
-            <WeatherInfoCard1
-              icon="humidity"
-              value={`${0}%`}
-              type="Humidity"
-            />
+            <WeatherInfoCard1 icon="windy" value={`${0}kmh`} type="Wind" />
+            <WeatherInfoCard1 icon="humidity" value={`${0}%`} type="Humidity" />
             <WeatherInfoCard1
               icon="direction"
               value={`${0}deg`}
@@ -88,6 +82,17 @@ const TommorrowFrcst = ({ ...props }) => {
             />
           </Flex>
         </WeatherRowContainer>
+        <Bottom>
+          <Flex margin='50px 0 0 0' width='100%' direction="column" gap='15px' >
+            <RowItem />
+            <RowItem />
+            <RowItem />
+            <RowItem />
+            <RowItem />
+            <RowItem />
+            <RowItem />
+          </Flex>
+        </Bottom>
       </Screen>
     </StyledTommorrowFrcst>
   );
