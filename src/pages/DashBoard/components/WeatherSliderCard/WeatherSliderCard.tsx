@@ -20,7 +20,7 @@ const WeatherSliderCard = ({ ...props }) => {
     <StyledWeatherSliderCard>
       <Paragraph text="23" weight="700" size="16px" height="20px" margin="0 0 5px 0"/>
       <Wrapper width="30px" height="30px" margin="0 0 3px 0">
-        <GlobalSvgSelector id="sunny" />
+        <GlobalSvgSelector id="clearSky" />
       </Wrapper>
       <Paragraph
         text="10:00"
