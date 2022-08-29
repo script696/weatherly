@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components/macro";
 import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
 import Button from "../../shared/Button/Button";
@@ -19,13 +18,11 @@ import MainWeatherInfoContainer from "./components/MainWeatherInfoContainer/Main
 import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import BottomSlider from "./components/BottomSlider/BottomSlider";
 import Swiper1 from "./components/Swiper";
+import weatherIcons from "../../img/weatherIcons/weatherIcons";
 
-import functionName from '../../api'
-
-
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useAppSelector } from "../../hooks/hooks";
+import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
+import { useEffect } from "react";
 
 const StyledDashBoard = styled.div`
   position: relative;
@@ -38,8 +35,20 @@ const StyledDashBoard = styled.div`
 `;
 
 const DashBoard = () => {
+  const {
+    currentDate: { currentDay, currentMonth },
+    currentWeather: {
+      temperature,
+      windspeed,
+      winddirection,
+      weathercode,
+      humidity,
+      weatherTextStatus,
+    },
+  } = useAppSelector((state) => state.weather);
 
-  functionName()
+  
+
   return (
     <StyledDashBoard>
       <Screen>
@@ -74,22 +83,27 @@ const DashBoard = () => {
         <MainWeatherLogoContainer>
           <Flex height="100%">
             <Wrapper width="200px" height="200px">
-              <GlobalSvgSelector id="clearSky" />
+              <WeatherIcon src={weatherIcons[weathercode]} />
             </Wrapper>
           </Flex>
         </MainWeatherLogoContainer>
         <MainWeatherInfoContainer>
           <Flex direction="column" margin="auto" width="50%">
-            <Paragraph text="22" weight="700" size="116px" height="143px" />
             <Paragraph
-              text="Thunderstorm"
+              text={Math.round(temperature)}
+              weight="700"
+              size="116px"
+              height="143px"
+            />
+            <Paragraph
+              text={weatherTextStatus}
               weight="800"
               size="22px"
               height="27px"
               margin="0 0 3px 0"
             />
             <Paragraph
-              text="Today, 10 August"
+              text={`Today, ${currentDay} ${currentMonth}`}
               weight="500"
               size="12px"
               height="15px"
@@ -99,9 +113,21 @@ const DashBoard = () => {
         </MainWeatherInfoContainer>
         <MainWeatherInfoContainer>
           <Flex gap="53px">
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
-            <WeatherInfoCard1 icon="windy" value="12kmph" type="Wind" />
+            <WeatherInfoCard1
+              icon="windy"
+              value={`${windspeed}kmh`}
+              type="Wind"
+            />
+            <WeatherInfoCard1
+              icon="humidity"
+              value={`${humidity}%`}
+              type="Humidity"
+            />
+            <WeatherInfoCard1
+              icon="direction"
+              value={`${winddirection}deg`}
+              type="Direction"
+            />
           </Flex>
         </MainWeatherInfoContainer>
       </Screen>
@@ -120,7 +146,7 @@ const DashBoard = () => {
           </Flex>
         </BottomHeader>
         <BottomSlider>
-         <Swiper1/>
+          <Swiper1 />
         </BottomSlider>
       </Bottom>
     </StyledDashBoard>
