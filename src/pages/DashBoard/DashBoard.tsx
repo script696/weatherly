@@ -74,7 +74,7 @@ const DashBoard = () => {
         <MainWeatherLogoContainer>
           <Flex height="100%">
             <Wrapper width="200px" height="200px">
-              <GlobalSvgSelector id="sunny" />
+              <GlobalSvgSelector id="clearSky" />
             </Wrapper>
           </Flex>
         </MainWeatherLogoContainer>
