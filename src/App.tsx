@@ -2,11 +2,11 @@ import styled from "styled-components/macro";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import Flex from "./shared/Flex/Flex";
 import Phone from "./shared/Phone/Phone";
-
-import getWeather from "./api";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { fetchWeather } from "./store/slices/weatherSlice";
+import TommorrowFrcst from "./pages/TommorrowFrcst/TommorrowFrcst";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -20,28 +20,20 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(fetchWeather());
+  }, [dispatch]);
 
-  const {currentWeather} = useAppSelector(state => state.weather)
-  const dispatch = useAppDispatch()
-
- 
-
-  useEffect(()=>{
-    dispatch(fetchWeather())
-  },[dispatch])
-
-
-// useEffect(()=>{
-//   console.log(daylyForecast);
-  
-// },[daylyForecast])
-  
   return (
     <AppWrapper>
       <Flex height="100%">
         <Phone>
-          <DashBoard />
+          <Switch>
+            <Route path="/today" exact component={DashBoard} />
+            <Route path="/tomorrow" exact component={TommorrowFrcst}/>
+          </Switch>
         </Phone>
       </Flex>
     </AppWrapper>
