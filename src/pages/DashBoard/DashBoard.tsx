@@ -3,11 +3,11 @@ import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
 import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Wrapper from "../../shared/Wrapper/Wrapper";
-import Bottom from "./components/Bottom/Bottom";
+import Bottom from "../../shared/Bottom/Bottom";
 import BottomHeader from "./components/BottomHeader/BottomHeader";
-import Screen from "./components/Screen/Screen";
+import Screen from "../../shared/Screen/Screen";
 import Title from "../../shared/Title/Title";
-import TopMenuContainer from "./components/TopMenuContainer/TopMenuContainer";
+import TopMenuContainer from "../../shared/TopMenuContainer/TopMenuContainer";
 import Paragraph from "../../shared/Paragraph/Paragraph";
 import UpdateInfo from "./components/UpdateInfo/UpdateInfo";
 import UpdateIndicator from "./components/UpdateIndicator/UpdateIndicator";
@@ -22,9 +22,9 @@ import weatherIcons from "../../img/weatherIcons/weatherIcons";
 
 import { useAppSelector } from "../../hooks/hooks";
 import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
-import { useEffect } from "react";
+import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 
-const StyledDashBoard = styled.div`
+const StyledDashBoard = styled.section`
   position: relative;
   z-index: 1;
   margin: auto;
@@ -51,7 +51,7 @@ const DashBoard = () => {
 
   return (
     <StyledDashBoard>
-      <Screen>
+      <Screen height='613px'>
         <TopMenuContainer>
           <Flex>
             <Button width="35px" height="35px">
@@ -111,7 +111,7 @@ const DashBoard = () => {
             />
           </Flex>
         </MainWeatherInfoContainer>
-        <MainWeatherInfoContainer>
+        <WeatherRowContainer>
           <Flex gap="53px">
             <WeatherInfoCard1
               icon="windy"
@@ -129,7 +129,7 @@ const DashBoard = () => {
               type="Direction"
             />
           </Flex>
-        </MainWeatherInfoContainer>
+        </WeatherRowContainer>
       </Screen>
       <Bottom>
         <BottomHeader>

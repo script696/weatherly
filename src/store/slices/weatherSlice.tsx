@@ -5,39 +5,37 @@ import axios from "axios";
 const URL =
   "https://api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6176&hourly=temperature_2m,relativehumidity_2m,showers,weathercode&daily=weathercode&current_weather=true&timezone=Europe%2FMoscow";
 
+interface ICurrentWeather {
+  temperature: number;
+  windspeed: number;
+  winddirection: number;
+  weathercode: number;
+  time: string;
+  humidity: number;
+}
 
-  interface ICurrentWeather {
-    temperature: number;
-    windspeed: number;
-    winddirection: number;
-    weathercode: number;
-    time: string;
-    humidity: number;
-  }
-  
-  interface weatherDataState {
-    currentWeather: ICurrentWeather;
-    relativeHumidity2m: ReadonlyArray<string>;
-    temperature2m: ReadonlyArray<string>;
-    time: ReadonlyArray<string>;
-    weatherCode: ReadonlyArray<string>;
-    dailyForecast: any;
-    MONTH_INDEX: object;
-    status: null;
-    error: null;
-  }
-  
-  interface IPayload {
-    payload: {
-      time: Array<string>;
-      temperature: Array<string>;
-    };
-  }
+interface weatherDataState {
+  currentWeather: ICurrentWeather;
+  relativeHumidity2m: ReadonlyArray<string>;
+  temperature2m: ReadonlyArray<string>;
+  time: ReadonlyArray<string>;
+  weatherCode: ReadonlyArray<string>;
+  dailyForecast: any;
+  MONTH_INDEX: object;
+  status: null;
+  error: null;
+}
 
-  interface IinitialState {
-    currentWeather : ICurrentWeather,
+interface IPayload {
+  payload: {
+    time: Array<string>;
+    temperature: Array<string>;
+  };
+}
 
-  }
+interface IinitialState {
+  currentWeather: ICurrentWeather;
+}
 
 const currentWeather: any = {
   temperature: null,
@@ -105,6 +103,8 @@ export const weatherSliceReducer = createSlice({
       const dailyForecast = handleWeatherData({
         data: action.payload,
       });
+
+      console.log(action.payload);
 
       state.currentWeather = { ...dailyForecast.currentWeather };
       state.currentDate = { ...dailyForecast.currentDateData };

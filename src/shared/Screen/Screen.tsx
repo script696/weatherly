@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-const StyledScreen = styled.div`
+const StyledScreen = styled.div<any>`
   position: relative;
-  height: 619px;
+  height: ${({height} ) => height || '613px'};
   border-radius: 65px;
   background: linear-gradient(193.87deg, #82daf4 4.96%, #126cf4 97.35%);
   &::after {
@@ -11,7 +11,7 @@ const StyledScreen = styled.div`
     position: absolute;
     z-index: -1;
     width: 331px;
-    height: 619px;
+    height: 100%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -48%);
