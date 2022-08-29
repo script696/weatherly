@@ -8,8 +8,8 @@ interface ICurrentWeather {
   temperature: number;
   windspeed: number;
   winddirection: number;
-  weathercode: number; 
-  time: string
+  weathercode: number;
+  time: string;
 }
 
 interface weatherDataState {
@@ -18,6 +18,7 @@ interface weatherDataState {
   temperature2m: ReadonlyArray<string>;
   time: ReadonlyArray<string>;
   weatherCode: ReadonlyArray<string>;
+  dailyForecast: any;
   status: null;
   error: null;
 }
@@ -29,22 +30,42 @@ interface IPayload {
   };
 }
 
-const currentWeather : ICurrentWeather = {
+const currentWeather: ICurrentWeather = {
   temperature: -1000,
   windspeed: -1000,
   winddirection: -1000,
   weathercode: -1000,
-  time: '',
-}
+  time: "",
+};
 
 const initialState: weatherDataState = {
   currentWeather,
   relativeHumidity2m: [""],
-  temperature2m: [''],
-  time: [''],
-  weatherCode: [''],
+  temperature2m: [""],
+  time: [""],
+  weatherCode: [""],
+  dailyForecast: {
+    dayTime: null,
+    dayTemp: null,
+    dayWeatherCode: null,
+  },
   status: null,
   error: null,
+};
+
+const handleDailyForecast = ({ current_weather, time, temperature_2m, weathercode }: any) => {
+  const currentTime = current_weather.time;
+  const startIndex = time.indexOf(currentTime);
+
+
+  const dayTime = time
+  .slice(startIndex, startIndex + 24)
+  .map((val : string) => val.slice(-5));
+  const dayTemp = temperature_2m.slice(startIndex, startIndex + 24)
+  .map((val : number) => Math.round(val));
+  const dayWeatherCode = weathercode.slice(startIndex, startIndex + 24);
+
+  return{dayTime, dayTemp, dayWeatherCode};
 };
 
 export const fetchWeather: any = createAsyncThunk(
@@ -56,8 +77,8 @@ export const fetchWeather: any = createAsyncThunk(
       if (data.status !== 200) {
         throw new Error("Server Error");
       }
-      
-      return data.data
+
+      return data.data;
     } catch (err: any) {
       return rejectWithValue(err.message);
     }
@@ -68,11 +89,8 @@ export const weatherSliceReducer = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    // setWeatherData: (state, action: IPayload) => {
-    //   state.time = [...state.time, ...action.payload.time];
-    //   state.temperature = [...state.temperature, ...action.payload.temperature];
-    // },
     getWeatherData: (state, action: IPayload) => {},
+    
   },
   extraReducers: {
     [fetchWeather.pending]: (state: any) => {
@@ -81,24 +99,29 @@ export const weatherSliceReducer = createSlice({
     },
     [fetchWeather.fulfilled]: (state: any, action: any) => {
       state.status = "resolved";
-      
 
-      const {current_weather, hourly : {relativehumidity_2m, temperature_2m , time, weathercode}} = action.payload
+      const {
+        current_weather,
+        hourly: { relativehumidity_2m, temperature_2m, time, weathercode },
+      } = action.payload;
 
-      state.currentWeather = current_weather
-      state.relativeHumidity2m = relativehumidity_2m
-      state.temperature2m = temperature_2m
-      state.time = time
-      state.weatherCode = weathercode
+      state.currentWeather = current_weather;
+      state.relativeHumidity2m = relativehumidity_2m;
+      state.temperature2m = temperature_2m;
+      state.time = time;
+      state.weatherCode = weathercode;
 
+      const dailyForecast = handleDailyForecast({ current_weather, time, temperature_2m, weathercode });
+      state.dailyForecast = {...dailyForecast}
     },
     [fetchWeather.rejected]: (state: any, action: any) => {
-      state.status = 'rejected'
+      state.status = "rejected";
       state.error = action.payload;
     },
   },
 });
 
-export const { getWeatherData } = weatherSliceReducer.actions;
+export const { getWeatherData} =
+  weatherSliceReducer.actions;
 
 export default weatherSliceReducer.reducer;
