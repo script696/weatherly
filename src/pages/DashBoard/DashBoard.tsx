@@ -4,7 +4,6 @@ import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Wrapper from "../../shared/Wrapper/Wrapper";
 import Bottom from "../../shared/Bottom/Bottom";
-import BottomHeader from "../../shared/BottomNavigation/BottomNavigation";
 import Screen from "../../shared/Screen/Screen";
 import Title from "../../shared/Title/Title";
 import TopMenuContainer from "../../shared/TopMenuContainer/TopMenuContainer";
@@ -19,10 +18,11 @@ import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import BottomSlider from "./components/BottomSlider/BottomSlider";
 import Swiper1 from "./components/Swiper";
 import weatherIcons from "../../img/weatherIcons/weatherIcons";
-
 import { useAppSelector } from "../../hooks/hooks";
 import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
+import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
+import { useHistory } from "react-router-dom";
 
 const StyledDashBoard = styled.section`
   position: relative;
@@ -46,12 +46,11 @@ const DashBoard = () => {
       weatherTextStatus,
     },
   } = useAppSelector((state) => state.weather);
-
-  
+  const history = useHistory();
 
   return (
     <StyledDashBoard>
-      <Screen height='613px'>
+      <Screen height="613px">
         <TopMenuContainer>
           <Flex>
             <Button width="35px" height="35px">
@@ -132,19 +131,30 @@ const DashBoard = () => {
         </WeatherRowContainer>
       </Screen>
       <Bottom>
-        <BottomHeader>
+        <BottomNavigation>
           <Flex justify="space-between" width="100%">
             <Title size="18px" height="22px" text="Today" weight="800" />
-            <Button>
-              <Paragraph
-                text="7 days"
-                color="#fff"
-                size="12px"
+            <Button
+              onClick={() => history.push("/tomorrow")}
+              position="relative"
+              z="100"
+              height="25px"
+              width="50px"
+            >
+              <Paragraph text="7 days" color="#fff" size="12px" height="15px" />
+              <Wrapper
+                position="absolute"
+                top="50%"
+                right="-10px"
+                width="15px"
                 height="15px"
-              />
+                transform='translate(0, -50%)'
+              >
+                <GlobalSvgSelector id="arrowRight" />
+              </Wrapper>
             </Button>
           </Flex>
-        </BottomHeader>
+        </BottomNavigation>
         <BottomSlider>
           <Swiper1 />
         </BottomSlider>

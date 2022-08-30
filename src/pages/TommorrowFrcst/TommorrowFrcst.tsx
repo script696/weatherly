@@ -13,10 +13,11 @@ import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
 import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 import Wrapper from "../../shared/Wrapper/Wrapper";
-import BottomHeader from "../../shared/BottomNavigation/BottomNavigation";
 import MainInfoContainer from "./components/MainOnfoContainer/MainOnfoContainer";
 import TeampMinMax from "./components/TeampMinMax/TeampMinMax";
 import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
+import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
+import { Link, useHistory } from "react-router-dom";
 
 const StyledTommorrowFrcst = styled.section`
   position: relative;
@@ -40,7 +41,7 @@ const TommorrowFrcst = ({ ...props }) => {
       windspeedMax,
     },
   } = useAppSelector((state) => state.weather);
-
+  const history = useHistory();
 
   return (
     <StyledTommorrowFrcst {...props}>
@@ -109,19 +110,45 @@ const TommorrowFrcst = ({ ...props }) => {
           </Flex>
         </WeatherRowContainer>
         <Bottom>
-        <BottomHeader>
-          <Flex margin="30px 0 0 0" justify="space-between" width="100%" direction="row-reverse">
-            <Title size="18px" height="22px" text="Weekly Forecast" weight="800" />
-            <Button>
-              <Paragraph
-                text="Today"
-                color="#fff"
-                size="12px"
-                height="15px"
+          <BottomNavigation>
+            <Flex
+              margin="30px 0 0 0"
+              justify="space-between"
+              width="100%"
+              direction="row-reverse"
+            >
+              <Title
+                size="18px"
+                height="22px"
+                text="Weekly Forecast"
+                weight="800"
               />
-            </Button>
-          </Flex>
-        </BottomHeader>
+              <Button
+                onClick={() => history.push("/today")}
+                position="relative"
+                z="100"
+                height="25px"
+                width="50px"
+              >
+                <Paragraph
+                  text="Today"
+                  color="#fff"
+                  size="12px"
+                  height="20px"
+                />
+                <Wrapper
+                  position="absolute"
+                  top="50%"
+                  left="-10px"
+                  width="15px"
+                  height="15px"
+                  transform="translate(0, -50%)"
+                >
+                  <GlobalSvgSelector id="arrowLeft" />
+                </Wrapper>
+              </Button>
+            </Flex>
+          </BottomNavigation>
           <WeeklyForecast />
         </Bottom>
       </Screen>

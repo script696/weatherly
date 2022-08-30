@@ -7,10 +7,11 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { fetchWeather } from "./store/slices/weatherSlice";
 import TommorrowFrcst from "./pages/TommorrowFrcst/TommorrowFrcst";
+import PageNotFound from "./shared/PageNotFound/PageNotFound";
 
 const AppWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   background: linear-gradient(
       180deg,
       rgba(129, 217, 244, 0.6) 0%,
@@ -20,10 +21,6 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
-
-
-
-
 
 
   const dispatch = useAppDispatch();
@@ -39,6 +36,7 @@ function App() {
           <Switch>
             <Route path="/today" exact component={DashBoard} />
             <Route path="/tomorrow" exact component={TommorrowFrcst}/>
+            <Route path="*" exact component={PageNotFound}/>
           </Switch>
         </Phone>
       </Flex>

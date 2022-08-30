@@ -6,10 +6,10 @@ const StyledDegree = styled.div<any>`
   position: relative;
   &::after {
     color: ${({ color }) => color || "#fff"};
-    content: "O";
+    top: ${({ top }) => top || "-35%"};
+    right: ${({ right }) => right || "-20%"};
+    content: "0";
     position: absolute;
-    top: -35%;
-    right: -20%;
     width: auto;
     height: auto;
     font-size: 8px;
