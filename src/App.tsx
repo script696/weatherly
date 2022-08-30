@@ -25,9 +25,11 @@ function App() {
 
   const dispatch = useAppDispatch();
 
+  const {currentCityCoord} = useAppSelector(state => state.weather)
+
   useEffect(() => {
-    dispatch(fetchWeather());
-  }, [dispatch]);
+    dispatch(fetchWeather(currentCityCoord));
+  }, [currentCityCoord]);
 
   return (
     <AppWrapper>
