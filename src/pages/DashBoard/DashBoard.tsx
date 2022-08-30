@@ -4,7 +4,7 @@ import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Wrapper from "../../shared/Wrapper/Wrapper";
 import Bottom from "../../shared/Bottom/Bottom";
-import BottomHeader from "./components/BottomHeader/BottomHeader";
+import BottomHeader from "../../shared/BottomNavigation/BottomNavigation";
 import Screen from "../../shared/Screen/Screen";
 import Title from "../../shared/Title/Title";
 import TopMenuContainer from "../../shared/TopMenuContainer/TopMenuContainer";
@@ -138,7 +138,7 @@ const DashBoard = () => {
             <Button>
               <Paragraph
                 text="7 days"
-                color="#687B92"
+                color="#fff"
                 size="12px"
                 height="15px"
               />

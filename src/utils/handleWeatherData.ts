@@ -1,4 +1,4 @@
-const WEATHER_CODES: { [n: string]: any } = {
+const WEATHER_CODES: { [n: string]: string } = {
   "0": "Clear sky",
   "1": "Mainly clear",
   "2": "Party Cloud",
@@ -28,7 +28,7 @@ const WEATHER_CODES: { [n: string]: any } = {
   "99": "Thunderstorm (hail)",
 };
 
-const MONTH_INDEX: { [n: string]: any } = {
+const MONTH_INDEX: { [n: string]: string } = {
   "01": "January",
   "02": "February",
   "03": "March",
@@ -43,23 +43,25 @@ const MONTH_INDEX: { [n: string]: any } = {
   "12": "December",
 };
 var WEEKS_DAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "Sun",
+  "Mon",
+  "Tues",
+  "Wed",
+  "Thurs",
+  "Fri",
+  "Satur",
 ];
 
-const getDay = (whatDay: string) => {
+const getDay = (whatDay: string): string => {
   const dayIndex = new Date().getDay();
 
   switch (whatDay) {
     case "today":
-    return   WEEKS_DAYS[dayIndex]
+      return WEEKS_DAYS[dayIndex];
     case "tomorrow":
-    return   WEEKS_DAYS[dayIndex + 1]
+      return WEEKS_DAYS[dayIndex + 1];
+    default:
+      return "";
   }
 };
 
@@ -84,7 +86,7 @@ const getDailyForecast = (
   time: Array<string>,
   startIndex: number,
   temperature_2m: Array<number>,
-  weathercode: Array<any>
+  hourlyWeathercode: Array<any>
 ) => {
   const dayTime = time
     .slice(startIndex, startIndex + 24)
@@ -93,9 +95,9 @@ const getDailyForecast = (
     .slice(startIndex, startIndex + 24)
     .map((val: number) => Math.round(val));
 
-  const dayWeatherCode = weathercode.slice(startIndex, startIndex + 24);
+  const weathercode = hourlyWeathercode.slice(startIndex, startIndex + 24);
 
-  return { dayTime, dayTemp, dayWeatherCode };
+  return { dayTime, dayTemp, weathercode };
 };
 
 const getTomorrowForecast = ({
@@ -106,8 +108,6 @@ const getTomorrowForecast = ({
   winddirection_10m_dominant,
   windspeed_10m_max,
 }: any) => {
-  
-  
   return {
     precipitationSum: Math.round(precipitation_sum[1]),
     temperatureMax: Math.round(temperature_2m_max[1]),
@@ -116,6 +116,29 @@ const getTomorrowForecast = ({
     weatherCommon: WEATHER_CODES[weathercode[1]],
     winddirection: Math.round(winddirection_10m_dominant[1]),
     windspeedMax: Math.round(windspeed_10m_max[1]),
+  };
+};
+
+const getWeeklyForecast = ({
+  temperature_2m_max,
+  temperature_2m_min,
+  weathercode,
+}: any) => {
+  const currenDay: string = getDay("today");
+  const indexOfCurrentDay = WEEKS_DAYS.indexOf(currenDay);
+  const weekDayArr = [
+    ...WEEKS_DAYS.slice(indexOfCurrentDay),
+    ...WEEKS_DAYS.slice(0, indexOfCurrentDay),
+  ];
+const roundedMaxTemp = temperature_2m_max.map((val : number)  => Math.round(val))
+const roundedMinTemp = temperature_2m_min.map((val : number)  => Math.round(val))
+const weatherCommonArr = weathercode.map((val : number) => WEATHER_CODES[val])
+  return {
+    dayName: weekDayArr,
+    temperatureMax: roundedMaxTemp,
+    temperatureMin: roundedMinTemp,
+    weathercode: weathercode,
+    weatherCommon: weatherCommonArr,
   };
 };
 
@@ -150,7 +173,15 @@ const handleWeatherData = (data: any) => {
   );
 
   const tomorrowForecast = getTomorrowForecast(daily);
-  return { currentWeather, currentDateData, dailyForecast, tomorrowForecast };
+  const weeklyForecast = getWeeklyForecast(daily);
+
+  return {
+    currentWeather,
+    currentDateData,
+    dailyForecast,
+    tomorrowForecast,
+    weeklyForecast,
+  };
 };
 
 export { handleWeatherData };

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { useAppSelector } from "../../hooks/hooks";
 import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
@@ -8,14 +7,16 @@ import Button from "../../shared/Button/Button";
 import Flex from "../../shared/Flex/Flex";
 import Paragraph from "../../shared/Paragraph/Paragraph";
 import Screen from "../../shared/Screen/Screen";
+import Title from "../../shared/Title/Title";
 import TopMenuContainer from "../../shared/TopMenuContainer/TopMenuContainer";
 import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
 import WeatherInfoCard1 from "../../shared/WeatherInfoCard1/WeatherInfoCard1";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 import Wrapper from "../../shared/Wrapper/Wrapper";
+import BottomHeader from "../../shared/BottomNavigation/BottomNavigation";
 import MainInfoContainer from "./components/MainOnfoContainer/MainOnfoContainer";
-import RowItem from "./components/RowItem/RowItem";
 import TeampMinMax from "./components/TeampMinMax/TeampMinMax";
+import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 
 const StyledTommorrowFrcst = styled.section`
   position: relative;
@@ -40,9 +41,7 @@ const TommorrowFrcst = ({ ...props }) => {
     },
   } = useAppSelector((state) => state.weather);
 
-  // console.log(tomorrowForecast);
-  
-  
+
   return (
     <StyledTommorrowFrcst {...props}>
       <Screen height="357px">
@@ -76,7 +75,10 @@ const TommorrowFrcst = ({ ...props }) => {
                 size="18px"
                 height="22px"
               />
-              <TeampMinMax max={temperatureMax} min={`/${temperatureMin}${"\u00B0"}`} />
+              <TeampMinMax
+                max={temperatureMax}
+                min={`/${temperatureMin}${"\u00B0"}`}
+              />
               <Paragraph
                 text={weatherCommon}
                 weight="600"
@@ -89,8 +91,16 @@ const TommorrowFrcst = ({ ...props }) => {
         </MainInfoContainer>
         <WeatherRowContainer>
           <Flex gap="53px">
-            <WeatherInfoCard1 icon="windy" value={`${windspeedMax}kmh`} type="WindMax" />
-            <WeatherInfoCard1 icon="humidity" value={`${precipitationSum}mm`} type="PrecipitationSum" />
+            <WeatherInfoCard1
+              icon="windy"
+              value={`${windspeedMax}kmh`}
+              type="WindMax"
+            />
+            <WeatherInfoCard1
+              icon="humidity"
+              value={`${precipitationSum}mm`}
+              type="PrecipitationSum"
+            />
             <WeatherInfoCard1
               icon="direction"
               value={`${winddirection}deg`}
@@ -99,15 +109,20 @@ const TommorrowFrcst = ({ ...props }) => {
           </Flex>
         </WeatherRowContainer>
         <Bottom>
-          <Flex margin="50px 0 0 0" width="100%" direction="column" gap="15px">
-            <RowItem />
-            <RowItem />
-            <RowItem />
-            <RowItem />
-            <RowItem />
-            <RowItem />
-            <RowItem />
+        <BottomHeader>
+          <Flex margin="30px 0 0 0" justify="space-between" width="100%" direction="row-reverse">
+            <Title size="18px" height="22px" text="Weekly Forecast" weight="800" />
+            <Button>
+              <Paragraph
+                text="Today"
+                color="#fff"
+                size="12px"
+                height="15px"
+              />
+            </Button>
           </Flex>
+        </BottomHeader>
+          <WeeklyForecast />
         </Bottom>
       </Screen>
     </StyledTommorrowFrcst>
