@@ -99,16 +99,17 @@ const initialState: any = {
   citysCoord,
   currentCityCoord,
   currentCityName,
+  update: true,
+  timeFromLastUpdate: 0,
 };
-
-let URL = `https://api.open-meteo.com/v1/forecast?latitude=${currentCityCoord.latitude}&longitude=${currentCityCoord.longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow`;
 
 export const fetchWeather: any = createAsyncThunk(
   "weather/fetchWeather",
-  async ({latitude, longitude} : any, { rejectWithValue }) => {
+  async ({ latitude, longitude }: any, { rejectWithValue }) => {
     try {
-
-      const data = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow`);
+      const data = await axios.get(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow`
+      );
 
       if (data.status !== 200) {
         throw new Error("Server Error");
@@ -120,24 +121,6 @@ export const fetchWeather: any = createAsyncThunk(
     }
   }
 );
-// export const fetchWeather: any = createAsyncThunk(
-//   "weather/fetchWeather",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       console.log(currentCityCoord);
-
-//       const data = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${currentCityCoord.latitude}&longitude=${currentCityCoord.longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow`);
-
-//       if (data.status !== 200) {
-//         throw new Error("Server Error");
-//       }
-
-//       return data.data;
-//     } catch (err: any) {
-//       return rejectWithValue(err.message);
-//     }
-//   }
-// );
 
 export const weatherSliceReducer = createSlice({
   name: "weather",
@@ -146,16 +129,30 @@ export const weatherSliceReducer = createSlice({
     setCurrentCity: (state, action) => {
       state.currentCityName.name = action.payload;
       state.currentCityCoord = { ...citysCoord[action.payload] };
-      console.log(state.currentCityCoord);
+    },
+    setUpdate: (state) => {
+      console.log("setUpdate");
+      state.update = true;
+    },
+    setUpdateTime: (state, action) => {
+      state.timeFromLastUpdate += action.payload;
+
+      console.log('+30sec');
+      
     },
   },
   extraReducers: {
     [fetchWeather.pending]: (state: any) => {
       state.response.status = "loading";
       state.response.error = null;
+      state.timeFromLastUpdate = 0;
+      console.log('loading');
+      
     },
     [fetchWeather.fulfilled]: (state: any, action: any) => {
       state.status = "resolved";
+
+      state.update = false;
 
       const dailyForecast = handleWeatherData({
         data: action.payload,
@@ -174,6 +171,6 @@ export const weatherSliceReducer = createSlice({
   },
 });
 
-export const { setCurrentCity } = weatherSliceReducer.actions;
+export const { setCurrentCity, setUpdate, setUpdateTime } = weatherSliceReducer.actions;
 
 export default weatherSliceReducer.reducer;
