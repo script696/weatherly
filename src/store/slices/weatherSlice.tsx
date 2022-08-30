@@ -5,6 +5,8 @@ import axios from "axios";
 const URL =
   "https://api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6176&hourly=temperature_2m,relativehumidity_2m,showers,weathercode&daily=weathercode&current_weather=true&timezone=Europe%2FMoscow";
 
+const URL2 = 'https://api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6176&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow'
+
 interface ICurrentWeather {
   temperature: number;
   windspeed: number;
@@ -57,6 +59,17 @@ const dailyForecast = {
   dayWeatherCode: null,
 };
 
+const tomorrowForecast = {
+  precipitationSum: null,
+  temperatureMax: null,
+  temperatureMin: null,
+  weathercode: null,
+  weatherCommon: null,
+  winddirection: null,
+  windspeedMax: null,
+  dayName: null,
+}
+
 const response = {
   status: null,
   error: null,
@@ -66,6 +79,7 @@ const initialState: any = {
   currentWeather,
   currentDate,
   dailyForecast,
+  tomorrowForecast,
   response,
 };
 
@@ -73,7 +87,7 @@ export const fetchWeather: any = createAsyncThunk(
   "weather/fetchWeather",
   async (_, { rejectWithValue }): Promise<any> => {
     try {
-      const data = await axios.get(URL);
+      const data = await axios.get(URL2);
 
       if (data.status !== 200) {
         throw new Error("Server Error");
@@ -109,6 +123,7 @@ export const weatherSliceReducer = createSlice({
       state.currentWeather = { ...dailyForecast.currentWeather };
       state.currentDate = { ...dailyForecast.currentDateData };
       state.dailyForecast = { ...dailyForecast.dailyForecast };
+      state.tomorrowForecast = {...dailyForecast.tomorrowForecast}
     },
     [fetchWeather.rejected]: (state: any, action: any) => {
       state.response.status = "rejected";

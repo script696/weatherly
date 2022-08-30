@@ -11,7 +11,6 @@ const StyledSpan = styled.span<any>`
 
 const Span = ({ ...props }) => {
   const test = '\u00B0'
-  console.log(test);
   
   return <StyledSpan {...props}>{props.text}</StyledSpan>;
 };

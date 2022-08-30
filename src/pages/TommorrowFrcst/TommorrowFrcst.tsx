@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../../hooks/hooks";
 import GlobalSvgSelector from "../../img/logo/GlobalSvgSelector";
 import weatherIcons from "../../img/weatherIcons/weatherIcons";
 import Bottom from "../../shared/Bottom/Bottom";
@@ -27,6 +28,21 @@ const StyledTommorrowFrcst = styled.section`
 `;
 
 const TommorrowFrcst = ({ ...props }) => {
+  const {
+    tomorrowForecast: {
+      precipitationSum,
+      temperatureMax,
+      temperatureMin,
+      weathercode,
+      weatherCommon,
+      winddirection,
+      windspeedMax,
+    },
+  } = useAppSelector((state) => state.weather);
+
+  // console.log(tomorrowForecast);
+  
+  
   return (
     <StyledTommorrowFrcst {...props}>
       <Screen height="357px">
@@ -51,7 +67,7 @@ const TommorrowFrcst = ({ ...props }) => {
         <MainInfoContainer>
           <Flex>
             <Wrapper width="50%" height="166px">
-              <WeatherIcon src={weatherIcons[2]} />
+              <WeatherIcon src={weatherIcons[weathercode]} />
             </Wrapper>
             <Flex direction="column" width="50%" align="start">
               <Paragraph
@@ -60,9 +76,9 @@ const TommorrowFrcst = ({ ...props }) => {
                 size="18px"
                 height="22px"
               />
-              <TeampMinMax max="20" min={`/17${"\u00B0"}`} />
+              <TeampMinMax max={temperatureMax} min={`/${temperatureMin}${"\u00B0"}`} />
               <Paragraph
-                text="Rainy Cloud"
+                text={weatherCommon}
                 weight="600"
                 size="16px"
                 height="20px"
@@ -73,17 +89,17 @@ const TommorrowFrcst = ({ ...props }) => {
         </MainInfoContainer>
         <WeatherRowContainer>
           <Flex gap="53px">
-            <WeatherInfoCard1 icon="windy" value={`${0}kmh`} type="Wind" />
-            <WeatherInfoCard1 icon="humidity" value={`${0}%`} type="Humidity" />
+            <WeatherInfoCard1 icon="windy" value={`${windspeedMax}kmh`} type="WindMax" />
+            <WeatherInfoCard1 icon="humidity" value={`${precipitationSum}mm`} type="PrecipitationSum" />
             <WeatherInfoCard1
               icon="direction"
-              value={`${0}deg`}
+              value={`${winddirection}deg`}
               type="Direction"
             />
           </Flex>
         </WeatherRowContainer>
         <Bottom>
-          <Flex margin='50px 0 0 0' width='100%' direction="column" gap='15px' >
+          <Flex margin="50px 0 0 0" width="100%" direction="column" gap="15px">
             <RowItem />
             <RowItem />
             <RowItem />

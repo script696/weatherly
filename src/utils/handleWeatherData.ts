@@ -42,7 +42,26 @@ const MONTH_INDEX: { [n: string]: any } = {
   "11": "November",
   "12": "December",
 };
+var WEEKS_DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
+const getDay = (whatDay: string) => {
+  const dayIndex = new Date().getDay();
+
+  switch (whatDay) {
+    case "today":
+    return   WEEKS_DAYS[dayIndex]
+    case "tomorrow":
+    return   WEEKS_DAYS[dayIndex + 1]
+  }
+};
 
 const getCurrentWeather = (
   currentWeather: any,
@@ -50,8 +69,8 @@ const getCurrentWeather = (
   startIndex: number
 ) => {
   const humidity = relativehumidity_2m[startIndex];
-  const weatherTextStatus = WEATHER_CODES[currentWeather.weathercode]
-  
+  const weatherTextStatus = WEATHER_CODES[currentWeather.weathercode];
+
   return { ...currentWeather, humidity, weatherTextStatus };
 };
 
@@ -79,10 +98,37 @@ const getDailyForecast = (
   return { dayTime, dayTemp, dayWeatherCode };
 };
 
+const getTomorrowForecast = ({
+  precipitation_sum,
+  temperature_2m_max,
+  temperature_2m_min,
+  weathercode,
+  winddirection_10m_dominant,
+  windspeed_10m_max,
+}: any) => {
+  
+  
+  return {
+    precipitationSum: Math.round(precipitation_sum[1]),
+    temperatureMax: Math.round(temperature_2m_max[1]),
+    temperatureMin: Math.round(temperature_2m_min[1]),
+    weathercode: weathercode[1],
+    weatherCommon: WEATHER_CODES[weathercode[1]],
+    winddirection: Math.round(winddirection_10m_dominant[1]),
+    windspeedMax: Math.round(windspeed_10m_max[1]),
+  };
+};
+
 const handleWeatherData = (data: any) => {
   const {
     current_weather,
-    hourly: { relativehumidity_2m, temperature_2m, time, weathercode },
+    daily,
+    hourly: {
+      relativehumidity_2m,
+      temperature_2m,
+      time,
+      weathercode: hourlyWeathercode,
+    },
   } = data.data;
 
   const currentTime = current_weather.time;
@@ -100,10 +146,11 @@ const handleWeatherData = (data: any) => {
     time,
     startIndex,
     temperature_2m,
-    weathercode
+    hourlyWeathercode
   );
-  return { currentWeather, currentDateData, dailyForecast };
 
+  const tomorrowForecast = getTomorrowForecast(daily);
+  return { currentWeather, currentDateData, dailyForecast, tomorrowForecast };
 };
 
-export {handleWeatherData}
+export { handleWeatherData };
