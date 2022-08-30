@@ -6,7 +6,9 @@ import { useAppSelector } from "../../../hooks/hooks";
 
 
 
-const StyledSwiper = styled.div<any>``;
+const StyledSwiper = styled.div<any>`
+cursor: grab;
+`;
 const Swiper1 = () => {
   const {dailyForecast : {dayTime, dayTemp, weathercode} } = useAppSelector(state => state.weather)
 
