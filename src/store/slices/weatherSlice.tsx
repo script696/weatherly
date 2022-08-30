@@ -1,14 +1,45 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { handleWeatherData } from "../../utils/handleWeatherData";
 import axios from "axios";
-import { IcurrentDate, IcurrentWeather, IdailyForecast, IinitialState, Iresponse, ItomorrowForecast, IweatherResponse, IweeklyForecast } from "../types/types";
+import {
+  IcitysCoord,
+  IcurrentCity,
+  IcurrentDate,
+  IcurrentWeather,
+  IdailyForecast,
+  IinitialState,
+  Iresponse,
+  ItomorrowForecast,
+  IweeklyForecast,
+} from "../types/types";
 import { RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
 
-
-
-const URL =
-  "https://api.open-meteo.com/v1/forecast?latitude=55.7558&longitude=37.6176&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow";
-
+const citysCoord: any = {
+  Moscow: {
+    latitude: "55.75",
+    longitude: "37.62",
+  },
+  SaintP: {
+    latitude: "59.94",
+    longitude: "30.31",
+  },
+  Berlin: {
+    latitude: "52.52",
+    longitude: "13.41",
+  },
+  Kiev: {
+    latitude: "50.45",
+    longitude: "30.52",
+  },
+  Rome: {
+    latitude: "41.89",
+    longitude: "12.51",
+  },
+  Paris: {
+    latitude: "48.85",
+    longitude: "2.35",
+  },
+};
 
 const currentWeather: IcurrentWeather = {
   temperature: -0,
@@ -46,32 +77,45 @@ const weeklyForecast: IweeklyForecast = {
   weathercode: [],
   weatherCommon: [],
 };
-const response : Iresponse = {
+const response: Iresponse = {
   status: -0,
-  error: '',
+  error: "",
 };
 
-const initialState: IinitialState = {
+const currentCityName: any = { name: "Moscow" };
+
+const currentCityCoord: any = {
+  latitude: "55.75",
+  longitude: "37.62",
+};
+
+const initialState: any = {
   currentWeather,
   currentDate,
   dailyForecast,
   tomorrowForecast,
   weeklyForecast,
   response,
+  citysCoord,
+  currentCityCoord,
+  currentCityName,
+  update: true,
+  timeFromLastUpdate: 0,
 };
 
 export const fetchWeather: any = createAsyncThunk(
   "weather/fetchWeather",
-  async (_, { rejectWithValue })=> {
+  async ({ latitude, longitude }: any, { rejectWithValue }) => {
     try {
-      const data = await axios.get(URL);
+      const data = await axios.get(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&timezone=Europe%2FMoscow`
+      );
 
       if (data.status !== 200) {
         throw new Error("Server Error");
       }
 
       return data.data;
-
     } catch (err: any) {
       return rejectWithValue(err.message);
     }
@@ -82,20 +126,37 @@ export const weatherSliceReducer = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    setWeatherLoading: (state) => {},
+    setCurrentCity: (state, action) => {
+      state.currentCityName.name = action.payload;
+      state.currentCityCoord = { ...citysCoord[action.payload] };
+    },
+    setUpdate: (state) => {
+      console.log("setUpdate");
+      state.update = true;
+    },
+    setUpdateTime: (state, action) => {
+      state.timeFromLastUpdate += action.payload;
+
+      console.log('+30sec');
+      
+    },
   },
   extraReducers: {
     [fetchWeather.pending]: (state: any) => {
       state.response.status = "loading";
       state.response.error = null;
+      state.timeFromLastUpdate = 0;
+      console.log('loading');
+      
     },
-    [fetchWeather.fulfilled]: (state : any, action: any) => {
+    [fetchWeather.fulfilled]: (state: any, action: any) => {
       state.status = "resolved";
+
+      state.update = false;
 
       const dailyForecast = handleWeatherData({
         data: action.payload,
       });
-
 
       state.currentWeather = { ...dailyForecast.currentWeather };
       state.currentDate = { ...dailyForecast.currentDateData };
@@ -110,6 +171,6 @@ export const weatherSliceReducer = createSlice({
   },
 });
 
-export const { setWeatherLoading } = weatherSliceReducer.actions;
+export const { setCurrentCity, setUpdate, setUpdateTime } = weatherSliceReducer.actions;
 
 export default weatherSliceReducer.reducer;

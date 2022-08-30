@@ -23,6 +23,7 @@ import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
 import { useHistory } from "react-router-dom";
+import BasicSelect from "../../shared/TestComponent/TestComponent";
 
 const StyledDashBoard = styled.section`
   position: relative;
@@ -48,6 +49,8 @@ const DashBoard = () => {
   } = useAppSelector((state) => state.weather);
   const history = useHistory();
 
+const {currentCityName : {name}} = useAppSelector(state => state.weather)
+
   return (
     <StyledDashBoard>
       <Screen height="613px">
@@ -59,13 +62,15 @@ const DashBoard = () => {
             <Wrapper>
               <Flex gap="15px">
                 <GlobalSvgSelector id="location" />
-                <Paragraph text="Karad" weight="700" size="22" height="27px" />
+                <Paragraph text={name} weight="700" size="22" height="27px" />
               </Flex>
             </Wrapper>
             <Flex width="35px" height="35px">
-              <Button width="35px" height="35px">
+            <BasicSelect/>
+
+              {/* <Button width="35px" height="35px">
                 <GlobalSvgSelector id="menuBtnBlank" />
-              </Button>
+              </Button> */}
             </Flex>
           </Flex>
         </TopMenuContainer>

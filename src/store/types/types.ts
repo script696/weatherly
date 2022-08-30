@@ -41,6 +41,18 @@ export interface Iresponse {
   error: string;
 }
 
+export interface IcurrentCity {
+  city : string;
+  latitude: string;
+  longitude: string;
+}
+
+export interface IcitysCoord {
+  cityName: string,
+    latitude: string,
+    longitude: string,
+}
+
 export interface IinitialState {
   currentWeather : IcurrentWeather;
   currentDate : IcurrentDate,
@@ -48,6 +60,8 @@ export interface IinitialState {
   tomorrowForecast : ItomorrowForecast,
   weeklyForecast : IweeklyForecast,
   response : Iresponse,
+  currentCity : IcurrentCity,
+  citysCoord : Array<IcitysCoord>,
 };
 
 export interface IweatherResponse {

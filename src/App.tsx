@@ -2,10 +2,10 @@ import styled from "styled-components/macro";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import Flex from "./shared/Flex/Flex";
 import Phone from "./shared/Phone/Phone";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
-import { fetchWeather } from "./store/slices/weatherSlice";
+import { fetchWeather, setUpdate } from "./store/slices/weatherSlice";
 import TommorrowFrcst from "./pages/TommorrowFrcst/TommorrowFrcst";
 import PageNotFound from "./shared/PageNotFound/PageNotFound";
 
@@ -20,14 +20,26 @@ const AppWrapper = styled.div`
     #ffffff;
 `;
 
-function App() {
-
-
+const App = () => {
   const dispatch = useAppDispatch();
 
+  const { currentCityCoord, update } = useAppSelector((state) => state.weather);
+
   useEffect(() => {
-    dispatch(fetchWeather());
-  }, [dispatch]);
+    setInterval(() => {
+      dispatch(setUpdate());
+    }, 1000 * 60 * 5);
+  }, []);
+
+  useEffect(() => {
+    if (update) {
+      dispatch(fetchWeather(currentCityCoord));
+    }
+  }, [update]);
+
+  // useEffect(() => {
+  //   dispatch(fetchWeather(currentCityCoord));
+  // }, [currentCityCoord]);
 
   return (
     <AppWrapper>
@@ -35,13 +47,13 @@ function App() {
         <Phone>
           <Switch>
             <Route path="/today" exact component={DashBoard} />
-            <Route path="/tomorrow" exact component={TommorrowFrcst}/>
-            <Route path="*" exact component={PageNotFound}/>
+            <Route path="/tomorrow" exact component={TommorrowFrcst} />
+            <Route path="*" exact component={PageNotFound} />
           </Switch>
         </Phone>
       </Flex>
     </AppWrapper>
   );
-}
+};
 
 export default App;
