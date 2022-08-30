@@ -9,6 +9,7 @@ const StyledFlex = styled.div<any>`
   align-items: ${({ align }) => align || "center"};
   justify-content: ${({ justify }) => justify || "center"};
   gap: ${({ gap }) => gap || "0"};
+  flex: ${({ flex }) => flex || "0 0 auto"};
 `;
 
 const Flex = (props: any) => {

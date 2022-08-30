@@ -1,29 +1,58 @@
-interface ICurrentWeather {
+export interface IcurrentWeather {
+  weathercode: number;
   temperature: number;
   windspeed: number;
   winddirection: number;
-  weathercode: number;
   time: string;
+  humidity: number;
+  weatherTextStatus: string;
 }
 
-interface weatherDataState {
-  currentWeather: ICurrentWeather;
-  relativeHumidity2m: ReadonlyArray<string>;
-  temperature2m: ReadonlyArray<string>;
-  time: ReadonlyArray<string>;
-  weatherCode: ReadonlyArray<string>;
-  dailyForecast: any;
-  MONTH_INDEX: object;
-  status: null;
-  error: null;
+export interface IcurrentDate {
+  currentDay: string;
+  currentMonth: string;
 }
 
-interface IPayload {
-  payload: {
-    time: Array<string>;
-    temperature: Array<string>;
-  };
+export interface IdailyForecast {
+  weathercode: Array<number>;
+  dayTime: Array<string>;
+  dayTemp: Array<number>;
 }
 
+export interface ItomorrowForecast {
+  weathercode: number;
+  precipitationSum: number;
+  temperatureMax: number;
+  temperatureMin: number;
+  weatherCommon: string;
+  winddirection: number;
+  windspeedMax: number;
+}
 
-export {}
+export interface IweeklyForecast {
+  weathercode: Array<number>;
+  dayName: Array<string>;
+  temperatureMax: Array<number>;
+  temperatureMin: Array<number>;
+  weatherCommon: Array<string>;
+}
+export interface Iresponse {
+  status: number;
+  error: string;
+}
+
+export interface IinitialState {
+  currentWeather : IcurrentWeather;
+  currentDate : IcurrentDate,
+  dailyForecast : IdailyForecast,
+  tomorrowForecast : ItomorrowForecast,
+  weeklyForecast : IweeklyForecast,
+  response : Iresponse,
+};
+
+export interface IweatherResponse {
+  current_weather : Object;
+  daily : Object;
+  hourly : Object;
+}
+
