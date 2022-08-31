@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/messenger/static/css/main.46cef12e.css",
-    "main.js": "/messenger/static/js/main.0a4b4beb.js",
-    "static/media/overcast.png": "/messenger/static/media/overcast.6ed4cefe963ff7d7e177.png",
-    "static/media/mainlyClear.png": "/messenger/static/media/mainlyClear.260dde6a7f3e3a1ebd3d.png",
-    "static/media/clearSky.png": "/messenger/static/media/clearSky.7660b8aff9054e612f71.png",
-    "static/media/fog.png": "/messenger/static/media/fog.2fbe91bbd7e96b843dbc.png",
-    "static/media/rain.png": "/messenger/static/media/rain.c486de1f17a499005c4c.png",
-    "static/media/drizzle.png": "/messenger/static/media/drizzle.28fe6fce7ff8d3d85234.png",
-    "static/media/thunderstorm.png": "/messenger/static/media/thunderstorm.e2bcb96ec88ebf3c4886.png",
-    "static/media/snow.png": "/messenger/static/media/snow.21e77d3046a7d35286f8.png",
-    "static/media/rainShowest.png": "/messenger/static/media/rainShowest.3ebf803234f8c5ca3b88.png",
-    "static/media/snowShowest.png": "/messenger/static/media/snowShowest.dfb9421058c90a7a6d7f.png",
-    "static/media/partyCloudy.png": "/messenger/static/media/partyCloudy.4aff9c99520d2809b0e6.png",
-    "index.html": "/messenger/index.html",
-    "main.46cef12e.css.map": "/messenger/static/css/main.46cef12e.css.map",
-    "main.0a4b4beb.js.map": "/messenger/static/js/main.0a4b4beb.js.map"
+    "main.css": "/weatherly/static/css/main.46cef12e.css",
+    "main.js": "/weatherly/static/js/main.10a2319b.js",
+    "static/media/overcast.png": "/weatherly/static/media/overcast.8c4053c9ccf89675f481.png",
+    "static/media/mainlyClear.png": "/weatherly/static/media/mainlyClear.f25246566a8494e5b69f.png",
+    "static/media/clearSky.png": "/weatherly/static/media/clearSky.f0506fdb62234c8af517.png",
+    "static/media/fog.png": "/weatherly/static/media/fog.02580b51bf2dfd994b38.png",
+    "static/media/rain.png": "/weatherly/static/media/rain.0faa49a40fef2f4c6d1f.png",
+    "static/media/drizzle.png": "/weatherly/static/media/drizzle.a07017f4d93be7303912.png",
+    "static/media/snow.png": "/weatherly/static/media/snow.fbbe352ec4cb07483353.png",
+    "static/media/thunderstorm.png": "/weatherly/static/media/thunderstorm.2c0c6f89a880be462f45.png",
+    "static/media/snowShowest.png": "/weatherly/static/media/snowShowest.9b42c4226ddd99421b23.png",
+    "static/media/rainShowest.png": "/weatherly/static/media/rainShowest.72d9c33b18fe200a5921.png",
+    "static/media/partyCloudy.png": "/weatherly/static/media/partyCloudy.b9fb1139ebb2196e34a6.png",
+    "index.html": "/weatherly/index.html",
+    "main.46cef12e.css.map": "/weatherly/static/css/main.46cef12e.css.map",
+    "main.10a2319b.js.map": "/weatherly/static/js/main.10a2319b.js.map"
   },
   "entrypoints": [
     "static/css/main.46cef12e.css",
-    "static/js/main.0a4b4beb.js"
+    "static/js/main.10a2319b.js"
   ]
 }
