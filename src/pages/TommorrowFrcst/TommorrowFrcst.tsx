@@ -18,6 +18,7 @@ import TeampMinMax from "./components/TeampMinMax/TeampMinMax";
 import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
 import { Link, useHistory } from "react-router-dom";
+import LongMenu from "../../shared/DropDownMenu/DropDownMenu";
 
 const StyledTommorrowFrcst = styled.section`
   position: relative;
@@ -48,19 +49,15 @@ const TommorrowFrcst = ({ ...props }) => {
       <Screen height="357px">
         <TopMenuContainer>
           <Flex>
-            <Button width="35px" height="35px">
-              <GlobalSvgSelector id="menuBtnCircle" />
-            </Button>
+            <Button width="35px" height="35px"></Button>
             <Wrapper>
               <Flex gap="15px">
                 <GlobalSvgSelector id="calendar" />
-                <Paragraph text="7 Days" weight="700" size="22" height="27px" />
+                <Paragraph text="7 days" weight="700" size="22" height="27px" />
               </Flex>
             </Wrapper>
             <Flex width="35px" height="35px">
-              <Button width="35px" height="35px">
-                <GlobalSvgSelector id="menuBtnBlank" />
-              </Button>
+              <LongMenu />
             </Flex>
           </Flex>
         </TopMenuContainer>
