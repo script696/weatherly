@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import scaleSliceReducer  from './slices/scaleSlice'
 import weatherSliceReducer from './slices/weatherSlice'
 
  const store = configureStore({
   reducer: {
     weather: weatherSliceReducer,
+    scale: scaleSliceReducer,
   }
 })
 

@@ -16,7 +16,6 @@ transform: ${({transform}) => `scale(calc(0.5 + ${transform}))` || 'scale(1)'};
 
 const Phone = ({...props}) => {
 
-console.log(props.transform);
 
   return (
     <StyledPhone {...props}></StyledPhone>

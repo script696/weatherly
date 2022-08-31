@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { setScaleVal } from '../../store/slices/weatherSlice';
 import { useAppDispatch } from '../../hooks/hooks';
+import { setScaleVal } from '../../store/slices/scaleSlice';
 
 export default function VerticalSlider() {
   function preventHorizontalKeyboardNavigation(event: React.KeyboardEvent) {

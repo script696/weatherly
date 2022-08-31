@@ -143,6 +143,8 @@ const weatherCommonArr = weathercode.map((val : number) => WEATHER_CODES[val])
 };
 
 const handleWeatherData = (data: any) => {
+  console.log(data);
+  
   const {
     current_weather,
     daily,
