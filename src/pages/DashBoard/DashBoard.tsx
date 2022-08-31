@@ -23,8 +23,9 @@ import WeatherIcon from "../../shared/WeatherIcon/WeatherIcon";
 import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowContainer";
 import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
 import { useHistory } from "react-router-dom";
-import BasicSelect from "../../shared/TestComponent/TestComponent";
+
 import Degree from "../../shared/Degree/Degree";
+import LongMenu from "../../shared/DropDownMenu/DropDownMenu";
 
 const StyledDashBoard = styled.section`
   position: relative;
@@ -69,7 +70,7 @@ const DashBoard = () => {
               </Flex>
             </Wrapper>
             <Flex width="35px" height="35px">
-              <BasicSelect />
+              <LongMenu />
             </Flex>
           </Flex>
         </TopMenuContainer>
