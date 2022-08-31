@@ -11,7 +11,6 @@ background: #000918;
 border-radius: 71px;
 `
 
-
 const Phone = ({...props}) => {
   return (
     <StyledPhone {...props}></StyledPhone>

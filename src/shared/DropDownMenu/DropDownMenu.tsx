@@ -13,7 +13,7 @@ const theme = createTheme({
       paper: "#fff",
     },
     text: {
-      primary: "blue",
+      primary: "#000918",
       secondary: "#46505A",
     },
     action: {
@@ -22,13 +22,7 @@ const theme = createTheme({
   },
 });
 
-const options = [
-  "Moscow",
-  "Berlin",
-  "Madrid",
-];
 
-const ITEM_HEIGHT = 48;
 
 export default function LongMenu() {
 
@@ -45,12 +39,14 @@ const arrOfCitys = Object.keys(citysCoord)
   };
   const handleClose = (city : any) => {
     setAnchorEl(null);
-    dispatch(setCurrentCity(city.textContent))
+    if(city.textContent){
+      dispatch(setCurrentCity(city.textContent))
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div >
         <IconButton
         sx={{padding : '0'}}
           aria-label="more"
@@ -63,6 +59,7 @@ const arrOfCitys = Object.keys(citysCoord)
           <MoreVertIcon sx={{ color : '#fff'}}/>
         </IconButton>
         <Menu
+        
           id="long-menu"
           MenuListProps={{
             "aria-labelledby": "long-button",
@@ -72,14 +69,27 @@ const arrOfCitys = Object.keys(citysCoord)
           onClose={handleClose}
           PaperProps={{
             style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: "20ch",
+              maxHeight: '500px',
+              width: "250px",
+              background: 'rgba(255,255,255, 0.8)',
+              transform: 'translate(-95%, 5%)',
+              boxShadow: 'none',
+              borderRadius: '10px',
+              color: 'black',
             },
           }}
         >
           {arrOfCitys?.map((option) => (
             <MenuItem
-            sx={{color : 'text.primary'}}
+            sx={{
+              color : 'text.primary',
+              background: 'none',
+              border: '2px solid #000918',
+              margin: '20px',
+              display: 'flex',
+              justifyContent: 'center',
+
+            }}
               key={option}
               selected={option === "Pyxis"}
               onClick={(e)=> handleClose(e.target)}
