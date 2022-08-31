@@ -72,7 +72,7 @@ export interface IweatherResponse {
   hourly: Object;
 }
 
-export interface IinitialState {
+export interface IweatherInitialState {
   currentWeather: IcurrentWeather;
   currentDate: IcurrentDate;
   dailyForecast: IdailyForecast;
@@ -83,4 +83,8 @@ export interface IinitialState {
   currentCityCoord: IcurrentCityCoord;
   currentCityName : IcurrentCityName;
   updateData : IupdateData;
+}
+
+export interface IscaleInitialState {
+  scaleVal: number;
 }

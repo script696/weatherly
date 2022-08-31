@@ -25,10 +25,11 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   const {
-    scaleVal,
     currentCityCoord,
     updateData: { update, timerInterval },
   } = useAppSelector((state) => state.weather);
+
+  const { scaleVal } = useAppSelector((state) => state.scale);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,7 +63,7 @@ const App = () => {
         top="50%"
         left="10vw"
         transform="translateY(-50%)"
-        height='auto'
+        height="auto"
       >
         <VerticalSlider />
       </Wrapper>

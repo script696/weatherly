@@ -19,7 +19,6 @@ const Swiper1 = () => {
         spaceBetween={10}
         slidesPerView={4}
         grabCursor={true}
-        onSlideChange={() => console.log("slide change")}
       >
         {dayTime?.map((val : string, index : number) => {
           return (
