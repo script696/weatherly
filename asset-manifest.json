@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/today/static/css/main.46cef12e.css",
-    "main.js": "/today/static/js/main.ab7da854.js",
-    "static/media/overcast.png": "/today/static/media/overcast.6ed4cefe963ff7d7e177.png",
-    "static/media/mainlyClear.png": "/today/static/media/mainlyClear.260dde6a7f3e3a1ebd3d.png",
-    "static/media/clearSky.png": "/today/static/media/clearSky.7660b8aff9054e612f71.png",
-    "static/media/fog.png": "/today/static/media/fog.2fbe91bbd7e96b843dbc.png",
-    "static/media/rain.png": "/today/static/media/rain.c486de1f17a499005c4c.png",
-    "static/media/drizzle.png": "/today/static/media/drizzle.28fe6fce7ff8d3d85234.png",
-    "static/media/thunderstorm.png": "/today/static/media/thunderstorm.e2bcb96ec88ebf3c4886.png",
-    "static/media/snow.png": "/today/static/media/snow.21e77d3046a7d35286f8.png",
-    "static/media/rainShowest.png": "/today/static/media/rainShowest.3ebf803234f8c5ca3b88.png",
-    "static/media/snowShowest.png": "/today/static/media/snowShowest.dfb9421058c90a7a6d7f.png",
-    "static/media/partyCloudy.png": "/today/static/media/partyCloudy.4aff9c99520d2809b0e6.png",
-    "index.html": "/today/index.html",
-    "main.46cef12e.css.map": "/today/static/css/main.46cef12e.css.map",
-    "main.ab7da854.js.map": "/today/static/js/main.ab7da854.js.map"
+    "main.css": "/messenger/static/css/main.46cef12e.css",
+    "main.js": "/messenger/static/js/main.0a4b4beb.js",
+    "static/media/overcast.png": "/messenger/static/media/overcast.6ed4cefe963ff7d7e177.png",
+    "static/media/mainlyClear.png": "/messenger/static/media/mainlyClear.260dde6a7f3e3a1ebd3d.png",
+    "static/media/clearSky.png": "/messenger/static/media/clearSky.7660b8aff9054e612f71.png",
+    "static/media/fog.png": "/messenger/static/media/fog.2fbe91bbd7e96b843dbc.png",
+    "static/media/rain.png": "/messenger/static/media/rain.c486de1f17a499005c4c.png",
+    "static/media/drizzle.png": "/messenger/static/media/drizzle.28fe6fce7ff8d3d85234.png",
+    "static/media/thunderstorm.png": "/messenger/static/media/thunderstorm.e2bcb96ec88ebf3c4886.png",
+    "static/media/snow.png": "/messenger/static/media/snow.21e77d3046a7d35286f8.png",
+    "static/media/rainShowest.png": "/messenger/static/media/rainShowest.3ebf803234f8c5ca3b88.png",
+    "static/media/snowShowest.png": "/messenger/static/media/snowShowest.dfb9421058c90a7a6d7f.png",
+    "static/media/partyCloudy.png": "/messenger/static/media/partyCloudy.4aff9c99520d2809b0e6.png",
+    "index.html": "/messenger/index.html",
+    "main.46cef12e.css.map": "/messenger/static/css/main.46cef12e.css.map",
+    "main.0a4b4beb.js.map": "/messenger/static/js/main.0a4b4beb.js.map"
   },
   "entrypoints": [
     "static/css/main.46cef12e.css",
-    "static/js/main.ab7da854.js"
+    "static/js/main.0a4b4beb.js"
   ]
 }
