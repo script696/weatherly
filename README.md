@@ -25,6 +25,8 @@
 
 ![Screen Shot](https://github.com/script696/weatherly/blob/master/src/img/gh-pages/weatherlyMainImg.png)
 
+<a align="center" href="https://www.figma.com/file/uWNXHOHYuJ4PVz2Gw9v4RX/Weatherly---Weather-forecast-application-design-by-Sairaj-Mane-(Community)" target="_blank">Посмотреть макет</a>
+
 Прогноз погоды - приложение, 
     в котором реализован суточный и недельный проноз погоды с возможностью выбора города.
     Для изучения технологий Style Components и Redux Toolkit мною была выбрана идея разработчки небольшого приложения,
