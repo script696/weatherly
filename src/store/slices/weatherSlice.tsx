@@ -81,7 +81,7 @@ const response: Iresponse = {
   error: "",
 };
 
-const currentCityName: {name : string} = { name: "Moscow" };
+const currentCityName: { name: string } = { name: "Moscow" };
 
 const currentCityCoord: IcurrentCityCoord = {
   latitude: "55.75",
@@ -96,7 +96,7 @@ const updateData: IupdateData = {
   sec: 0,
   iconColor: "red",
 };
-const initialState: IinitialState = {
+const initialState: any = {
   currentWeather,
   currentDate,
   dailyForecast,
@@ -107,6 +107,7 @@ const initialState: IinitialState = {
   currentCityCoord,
   currentCityName,
   updateData,
+  scaleVal: 0.5,
 };
 
 export const fetchWeather: any = createAsyncThunk(
@@ -154,14 +155,16 @@ export const weatherSliceReducer = createSlice({
       }
       if (state.updateData.units === "min") {
         if (state.updateData.sec === 60) {
-
           state.updateData.timeFromLastUpdate += 1;
           state.updateData.sec = 0;
         } else {
-
           state.updateData.sec += 1;
         }
       }
+    },
+    setScaleVal: (state, action) => {
+      console.log(action.payload.value / 100);
+      state.scaleVal = action.payload.value / 200;
     },
   },
   extraReducers: {
@@ -194,7 +197,7 @@ export const weatherSliceReducer = createSlice({
   },
 });
 
-export const { setCurrentCity, setUpdate, setUpdateTime } =
+export const { setCurrentCity, setUpdate, setUpdateTime, setScaleVal } =
   weatherSliceReducer.actions;
 
 export default weatherSliceReducer.reducer;

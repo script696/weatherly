@@ -75,7 +75,6 @@ const arrOfCitys = Object.keys(citysCoord)
               transform: 'translate(-95%, 5%)',
               boxShadow: 'none',
               borderRadius: '10px',
-              color: 'black',
             },
           }}
         >

@@ -1,13 +1,14 @@
+import { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components/macro";
-import DashBoard from "./pages/DashBoard/DashBoard";
 import Flex from "./shared/Flex/Flex";
 import Phone from "./shared/Phone/Phone";
-import { Route, Switch } from "react-router-dom";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { fetchWeather, setUpdate } from "./store/slices/weatherSlice";
+import VerticalSlider from "./shared/VerticalSlider/VerticalSlider";
+import Wrapper from "./shared/Wrapper/Wrapper";
+import DashBoard from "./pages/DashBoard/DashBoard";
 import TommorrowFrcst from "./pages/TommorrowFrcst/TommorrowFrcst";
-import PageNotFound from "./shared/PageNotFound/PageNotFound";
+import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 
 const AppWrapper = styled.div`
   width: 100%;
@@ -24,6 +25,7 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   const {
+    scaleVal,
     currentCityCoord,
     updateData: { update, timerInterval },
   } = useAppSelector((state) => state.weather);
@@ -48,14 +50,22 @@ const App = () => {
   return (
     <AppWrapper>
       <Flex height="100%">
-        <Phone>
+        <Phone transform={scaleVal}>
           <Switch>
             <Route path="/today" exact component={DashBoard} />
             <Route path="/tomorrow" exact component={TommorrowFrcst} />
-            <Route path="*" exact component={PageNotFound} />
           </Switch>
         </Phone>
       </Flex>
+      <Wrapper
+        position="fixed"
+        top="50%"
+        left="10vw"
+        transform="translateY(-50%)"
+        height='auto'
+      >
+        <VerticalSlider />
+      </Wrapper>
     </AppWrapper>
   );
 };
