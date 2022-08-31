@@ -2,17 +2,16 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { handleWeatherData } from "../../utils/handleWeatherData";
 import axios from "axios";
 import {
-  IcitysCoord,
-  IcurrentCity,
+  IcurrentCityCoord,
   IcurrentDate,
   IcurrentWeather,
   IdailyForecast,
   IinitialState,
   Iresponse,
   ItomorrowForecast,
+  IupdateData,
   IweeklyForecast,
 } from "../types/types";
-import { RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
 
 const citysCoord: any = {
   Moscow: {
@@ -78,18 +77,26 @@ const weeklyForecast: IweeklyForecast = {
   weatherCommon: [],
 };
 const response: Iresponse = {
-  status: -0,
+  status: "",
   error: "",
 };
 
-const currentCityName: any = { name: "Moscow" };
+const currentCityName: {name : string} = { name: "Moscow" };
 
-const currentCityCoord: any = {
+const currentCityCoord: IcurrentCityCoord = {
   latitude: "55.75",
   longitude: "37.62",
 };
 
-const initialState: any = {
+const updateData: IupdateData = {
+  timeFromLastUpdate: 0,
+  update: false,
+  units: "sec",
+  timerInterval: 120000,
+  sec: 0,
+  iconColor: "red",
+};
+const initialState: IinitialState = {
   currentWeather,
   currentDate,
   dailyForecast,
@@ -99,8 +106,7 @@ const initialState: any = {
   citysCoord,
   currentCityCoord,
   currentCityName,
-  update: true,
-  timeFromLastUpdate: 0,
+  updateData,
 };
 
 export const fetchWeather: any = createAsyncThunk(
@@ -132,27 +138,44 @@ export const weatherSliceReducer = createSlice({
     },
     setUpdate: (state) => {
       console.log("setUpdate");
-      state.update = true;
+      state.updateData.update = true;
     },
     setUpdateTime: (state, action) => {
-      state.timeFromLastUpdate += action.payload;
+      if (
+        state.updateData.timeFromLastUpdate < 60 &&
+        state.updateData.units === "sec"
+      ) {
+        state.updateData.timeFromLastUpdate += action.payload;
+      }
+      if (state.updateData.timeFromLastUpdate === 60) {
+        state.updateData.timeFromLastUpdate = 1;
+        state.updateData.units = "min";
+        state.updateData.sec += 1;
+      }
+      if (state.updateData.units === "min") {
+        if (state.updateData.sec === 60) {
 
-      console.log('+30sec');
-      
+          state.updateData.timeFromLastUpdate += 1;
+          state.updateData.sec = 0;
+        } else {
+
+          state.updateData.sec += 1;
+        }
+      }
     },
   },
   extraReducers: {
     [fetchWeather.pending]: (state: any) => {
       state.response.status = "loading";
       state.response.error = null;
-      state.timeFromLastUpdate = 0;
-      console.log('loading');
-      
+      state.updateData.iconColor = "red";
     },
     [fetchWeather.fulfilled]: (state: any, action: any) => {
       state.status = "resolved";
-
-      state.update = false;
+      state.updateData.update = false;
+      state.updateData.units = "sec";
+      state.updateData.timeFromLastUpdate = 0;
+      state.updateData.iconColor = "green";
 
       const dailyForecast = handleWeatherData({
         data: action.payload,
@@ -171,6 +194,7 @@ export const weatherSliceReducer = createSlice({
   },
 });
 
-export const { setCurrentCity, setUpdate, setUpdateTime } = weatherSliceReducer.actions;
+export const { setCurrentCity, setUpdate, setUpdateTime } =
+  weatherSliceReducer.actions;
 
 export default weatherSliceReducer.reducer;

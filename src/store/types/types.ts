@@ -37,36 +37,50 @@ export interface IweeklyForecast {
   weatherCommon: Array<string>;
 }
 export interface Iresponse {
-  status: number;
+  status: string;
   error: string;
 }
 
-export interface IcurrentCity {
-  city : string;
+
+export interface IcitysCoord {
+  cityName: string;
   latitude: string;
   longitude: string;
 }
 
-export interface IcitysCoord {
-  cityName: string,
-    latitude: string,
-    longitude: string,
+export interface IcurrentCityCoord {
+  latitude: string;
+  longitude: string;
+}
+
+export interface IcurrentCityName {
+  name: string;
+}
+
+export interface IupdateData {
+  timeFromLastUpdate: number;
+  update: boolean;
+  units: string;
+  timerInterval: number;
+  sec: number;
+  iconColor: string;
+}
+
+export interface IweatherResponse {
+  current_weather: Object;
+  daily: Object;
+  hourly: Object;
 }
 
 export interface IinitialState {
-  currentWeather : IcurrentWeather;
-  currentDate : IcurrentDate,
-  dailyForecast : IdailyForecast,
-  tomorrowForecast : ItomorrowForecast,
-  weeklyForecast : IweeklyForecast,
-  response : Iresponse,
-  currentCity : IcurrentCity,
-  citysCoord : Array<IcitysCoord>,
-};
-
-export interface IweatherResponse {
-  current_weather : Object;
-  daily : Object;
-  hourly : Object;
+  currentWeather: IcurrentWeather;
+  currentDate: IcurrentDate;
+  dailyForecast: IdailyForecast;
+  tomorrowForecast: ItomorrowForecast;
+  weeklyForecast: IweeklyForecast;
+  response: Iresponse;
+  citysCoord: Array<IcitysCoord>;
+  currentCityCoord: IcurrentCityCoord;
+  currentCityName : IcurrentCityName;
+  updateData : IupdateData;
 }
-

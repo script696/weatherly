@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
 import { setUpdateTime } from "../../../../store/slices/weatherSlice";
@@ -9,18 +9,26 @@ const StyledUpdatedInfoMsg = styled.div<any>`
 `;
 
 const UpdatedInfoMsg = ({ ...props }) => {
-  const { timeFromLastUpdate } = useAppSelector((state) => state.weather);
+  const {
+    updateData: { units, timeFromLastUpdate, iconColor },
+  } = useAppSelector((state) => state.weather);
   const dispatch = useAppDispatch();
 
+
   useEffect(() => {
-    setInterval(() => {
-      dispatch(setUpdateTime(1))
+    const interval = setInterval(() => {
+
+      dispatch(setUpdateTime(1));
     }, 1000);
-  }, []);
+    return(
+      () => clearInterval(interval)
+    )
+  }, [dispatch]);
+
   return (
     <StyledUpdatedInfoMsg
       {...props}
-    >{`Updated ${timeFromLastUpdate}sec ago`}</StyledUpdatedInfoMsg>
+    >{`Updated ${timeFromLastUpdate} ${units} ago`}</StyledUpdatedInfoMsg>
   );
 };
 
