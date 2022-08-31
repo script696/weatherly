@@ -24,6 +24,7 @@ import WeatherRowContainer from "../../shared/WeatherRowContainer/WeatherRowCont
 import BottomNavigation from "../../shared/BottomNavigation/BottomNavigation";
 import { useHistory } from "react-router-dom";
 import BasicSelect from "../../shared/TestComponent/TestComponent";
+import Degree from "../../shared/Degree/Degree";
 
 const StyledDashBoard = styled.section`
   position: relative;
@@ -49,7 +50,10 @@ const DashBoard = () => {
   } = useAppSelector((state) => state.weather);
   const history = useHistory();
 
-const {currentCityName : {name}} = useAppSelector(state => state.weather)
+  const {
+    currentCityName: { name },
+    updateData: { iconColor },
+  } = useAppSelector((state) => state.weather);
 
   return (
     <StyledDashBoard>
@@ -57,7 +61,6 @@ const {currentCityName : {name}} = useAppSelector(state => state.weather)
         <TopMenuContainer>
           <Flex>
             <Button width="35px" height="35px">
-              <GlobalSvgSelector id="menuBtnCircle" />
             </Button>
             <Wrapper>
               <Flex gap="15px">
@@ -66,11 +69,7 @@ const {currentCityName : {name}} = useAppSelector(state => state.weather)
               </Flex>
             </Wrapper>
             <Flex width="35px" height="35px">
-            <BasicSelect/>
-
-              {/* <Button width="35px" height="35px">
-                <GlobalSvgSelector id="menuBtnBlank" />
-              </Button> */}
+              <BasicSelect />
             </Flex>
           </Flex>
         </TopMenuContainer>
@@ -78,7 +77,7 @@ const {currentCityName : {name}} = useAppSelector(state => state.weather)
           <Flex>
             <UpdateInfo>
               <Flex gap="20px">
-                <UpdateIndicator />
+                <UpdateIndicator background={iconColor} />
                 <UpdatedInfoMsg value="10" />
               </Flex>
             </UpdateInfo>
@@ -93,12 +92,14 @@ const {currentCityName : {name}} = useAppSelector(state => state.weather)
         </MainWeatherLogoContainer>
         <MainWeatherInfoContainer>
           <Flex direction="column" margin="auto" width="50%">
-            <Paragraph
-              text={Math.round(temperature)}
-              weight="700"
-              size="116px"
-              height="143px"
-            />
+            <Degree size='20px' top='10%' right='-5%'>
+              <Paragraph
+                text={Math.round(temperature)}
+                weight="700"
+                size="116px"
+                height="143px"
+              />
+            </Degree>
             <Paragraph
               text={weatherTextStatus}
               weight="800"
@@ -153,7 +154,7 @@ const {currentCityName : {name}} = useAppSelector(state => state.weather)
                 right="-10px"
                 width="15px"
                 height="15px"
-                transform='translate(0, -50%)'
+                transform="translate(0, -50%)"
               >
                 <GlobalSvgSelector id="arrowRight" />
               </Wrapper>

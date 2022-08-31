@@ -11,7 +11,7 @@ import PageNotFound from "./shared/PageNotFound/PageNotFound";
 
 const AppWrapper = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   background: linear-gradient(
       180deg,
       rgba(129, 217, 244, 0.6) 0%,
@@ -23,12 +23,16 @@ const AppWrapper = styled.div`
 const App = () => {
   const dispatch = useAppDispatch();
 
-  const { currentCityCoord, update } = useAppSelector((state) => state.weather);
+  const {
+    currentCityCoord,
+    updateData: { update, timerInterval },
+  } = useAppSelector((state) => state.weather);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       dispatch(setUpdate());
-    }, 1000 * 60 * 5);
+    }, timerInterval);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -37,9 +41,9 @@ const App = () => {
     }
   }, [update]);
 
-  // useEffect(() => {
-  //   dispatch(fetchWeather(currentCityCoord));
-  // }, [currentCityCoord]);
+  useEffect(() => {
+    dispatch(fetchWeather(currentCityCoord));
+  }, [currentCityCoord]);
 
   return (
     <AppWrapper>
