@@ -121,7 +121,7 @@ const TommorrowFrcst = ({ ...props }) => {
                 weight="800"
               />
               <Button
-                onClick={() => history.push("/today")}
+                onClick={() => history.push("/weatherly")}
                 position="relative"
                 z="100"
                 height="25px"

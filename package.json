@@ -54,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://localhost:3000/messenger",
+  "homepage": "https://script696.github.io/weatherly",
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "gh-pages": "^4.0.0"

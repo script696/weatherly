@@ -53,7 +53,7 @@ const App = () => {
       <Flex height="100%">
         <Phone transform={scaleVal}>
           <Switch>
-            <Route path="/today" exact component={DashBoard} />
+            <Route path="/weatherly" exact component={DashBoard} />
             <Route path="/tomorrow" exact component={TommorrowFrcst} />
           </Switch>
         </Phone>
