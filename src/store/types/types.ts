@@ -1,8 +1,33 @@
-export interface IcurrentWeather {
-  weathercode: number;
+export interface IResCurrentWeather {
   temperature: number;
   windspeed: number;
   winddirection: number;
+  weathercode: number;
+  time: string;
+}
+
+export interface IdailyWeather {
+  precipitation_sum: Array<number>;
+  temperature_2m_max: Array<number>;
+  temperature_2m_min: Array<number>;
+  time: Array<string>;
+  weathercode: Array<number>;
+  winddirection_10m_dominant: Array<number>;
+  windspeed_10m_max: Array<number>;
+}
+
+export interface IhourlyWeather {
+  time: Array<string>;
+  temperature_2m: Array<number>;
+  weathercode: Array<number>;
+  relativehumidity_2m: Array<number>;
+}
+
+export interface IcurrentWeather {
+  temperature: number;
+  windspeed: number;
+  winddirection: number;
+  weathercode: number;
   time: string;
   humidity: number;
   weatherTextStatus: string;
@@ -40,7 +65,6 @@ export interface Iresponse {
   status: string;
   error: string;
 }
-
 
 export interface IcitysCoord {
   cityName: string;
@@ -81,8 +105,8 @@ export interface IweatherInitialState {
   response: Iresponse;
   citysCoord: Array<IcitysCoord>;
   currentCityCoord: IcurrentCityCoord;
-  currentCityName : IcurrentCityName;
-  updateData : IupdateData;
+  currentCityName: IcurrentCityName;
+  updateData: IupdateData;
 }
 
 export interface IscaleInitialState {
